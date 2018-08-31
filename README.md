@@ -31,3 +31,39 @@ var method = obj.foo.bind(obj)
 ```
 >对应的babel
 https://babeljs.io/docs/en/babel-plugin-proposal-function-bind
+
+## ?.语法
+```jvascript
+const obj = {
+  foo: {
+    bar: {
+      baz() {
+        return 42;
+      },
+    },
+  },
+};
+
+const baz = obj?.foo?.bar?.baz(); // 42
+
+const safe = obj?.qux?.baz(); // undefined
+const safe2 = obj?.foo.bar.qux?.(); // undefined
+
+const willThrow = obj?.foo.bar.qux(); // Error: not a function
+
+// Top function can be called directly, too.
+function test() {
+  return 42;
+}
+test?.(); // 42
+
+exists?.(); // undefined
+//从代码中猜测是用于判断对象是否存在,如果存在则继续执行,如果不存在则返回undefind
+
+//如果是原生代码将多很多判断的代码
+if(obj&&obj.foo&&obj.foo.bar&&obj.foo.bar.baz){
+    obj.foo.bar.baz()
+}
+```
+> 对应的babel
+https://babeljs.io/docs/en/babel-plugin-proposal-optional-chaining
