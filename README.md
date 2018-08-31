@@ -67,3 +67,39 @@ if(obj&&obj.foo&&obj.foo.bar&&obj.foo.bar.baz){
 ```
 > 对应的babel
 https://babeljs.io/docs/en/babel-plugin-proposal-optional-chaining
+
+## |> 语法,管道操作
+```javascript
+const double = (n) => n * 2;
+const increment = (n) => n + 1;
+
+// without pipeline operator
+double(increment(double(double(5)))); // 42
+
+// with pipeline operator
+5 |> double |> double |> increment |> double; // 42
+
+//为了解决嵌套调用的语法糖
+```
+> 对应的bable
+> https://babeljs.io/docs/en/next/babel-plugin-proposal-export-default-from.html#example
+> 说明文档Pipeline operator
+> https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Pipeline_operator
+
+## do表达式
+```javascript
+let a = do {
+  if(x > 10) {
+    'big';
+  } else {
+    'small';
+  }
+};
+// is equivalent to:
+let a = x > 10 ? 'big' : 'small';
+
+//对a的赋值是一个运算
+
+```
+> 对应的bable
+> https://babeljs.io/docs/en/babel-plugin-proposal-do-expressions
