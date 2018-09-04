@@ -103,3 +103,70 @@ let a = x > 10 ? 'big' : 'small';
 ```
 > 对应的bable
 > https://babeljs.io/docs/en/babel-plugin-proposal-do-expressions
+
+
+## React 高阶组件
+
+日期 2018年9月4日
+
+深入理解 React 高阶组件 https://www.jianshu.com/p/0aae7d4d9bc1
+
+> 看文这篇文章我对高阶组件的理解:
+
+高阶组件的概念更像是 设计模式中的"装饰模式",将组件颗粒化,基础的组件通过高阶组件的包装达到功能的真强,同时高级组件之间也是独立的,不同的功能可以通过不同的高阶组件(或是通过多个)高阶组件来包装
+
+
+> 用高阶组件能干什么?
+
+* 代码复用，逻辑抽象，抽离底层准备（bootstrap）代码
+* 渲染劫持
+* State 抽象和更改
+* Props 更改
+  
+> 最基本的使用方法
+```jvascript
+
+//包装
+export defaunt function ppHOC(WrappedComponent) {
+  return class PP extends React.Component {
+    render() {
+      return (<div><WrappedComponent {...this.props}/></div>)
+    }
+  }
+}
+
+export defaunt class Example extends React.Component {
+  render() {
+    return <input name="name"/>
+  }
+}
+
+const HOC = PComponent(Example);
+
+```
+
+> 添加新的props或修改props
+``` javascript
+function ppHOC(WrappedComponent) {
+  return class PP extends React.Component {
+    render() {
+      const newProps = {
+        user: currentLoggedInUser
+      }
+      return <WrappedComponent {...this.props} {...newProps}/>
+    }
+  }
+}
+
+```
+
+> 反向继承
+```javascript
+function iiHOC(WrappedComponent) {
+  return class Enhancer extends WrappedComponent {
+    render() {
+      return super.render()
+    }
+  }
+}
+```
