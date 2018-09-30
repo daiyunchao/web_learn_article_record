@@ -177,3 +177,25 @@ https://cloud.tencent.com/developer/ask/81532/answers/created
 https://github.com/mrdulin/blog/issues/50
 
 https://github.com/RemoteDebug/remotedebug-ios-webkit-adapter#getting-started
+
+## 关于 React this.props.Children的一些介绍和用法
+A deep dive into children in React:https://mxstbr.blog/2017/02/react-children-deepdive/
+用:this.props.children 最基本的用法是输入嵌套在组件中的其他组件/文本
+用:this.props.children() 如果子组件是一个函数,用此方法输出函数返回的内容,并且如果有参数传递,还不主动刷新,这就是一些apollo-client用<Query>包裹组件实现的原来
+同时文章还提到了几个Child相关的方法:
+  React.Children.map 便利子组件
+  React.Children.count 获取子组件的数量
+  React.Children.toArray 将子组件转换成一个数组(但文中提到,只能用于转换普通element元素不能用于function类型)
+  React.Children.only 用于检测子组件是否只有一个 如果超过一个或直接报错
+  React.cloneElement 克隆组件,在克隆的同时还可以为该组件添加新的属性,如下面的例子,为全部的子元素添加一个 name属性
+  ```javascript
+  renderChildren() {
+  return React.Children.map(this.props.children, child => {
+    return React.cloneElement(child, {
+      name: this.props.name
+    })
+  })
+}
+  ```
+  
+  
